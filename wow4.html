@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NovaBuddy - Tutors</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Segoe UI,sans-serif;}
+body{background:#0f0f14;color:white;}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px;font-size:22px;font-weight:bold;border-bottom:1px solid #222;}
+.add-btn{font-size:28px;cursor:pointer;color:#00ff99;}
+.container{padding:20px;}
+.card{background:#1a1a25;border-radius:15px;padding:15px;margin-bottom:15px;display:flex;align-items:center;gap:15px;cursor:pointer;}
+.card img{width:70px;height:70px;border-radius:50%;object-fit:cover;border:2px solid #00ff99;}
+.modal{position:fixed;bottom:0;left:0;width:100%;background:#1c1c2b;padding:20px;border-top-left-radius:20px;border-top-right-radius:20px;display:none;}
+.modal input{width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:none;background:#2a2a3a;color:white;}
+.modal button{width:100%;padding:10px;border:none;border-radius:8px;background:#00c853;color:white;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<header>
+  สำรวจบอท 🚀
+  <div class="add-btn" onclick="openModal()">+</div>
+</header>
+
+<div class="container" id="tutorList"></div>
+
+<div class="modal" id="modal">
+  <h3>เพิ่มติวเตอร์</h3>
+  <input type="text" id="name" placeholder="ชื่อติวเตอร์">
+  <input type="text" id="subject" placeholder="วิชาที่สอน">
+  <input type="file" id="image" accept="image/*">
+  <button onclick="addTutor()">บันทึก</button>
+</div>
+
+<script>
+let tutors = JSON.parse(localStorage.getItem("tutors")) || [];
+
+function saveData(){
+  localStorage.setItem("tutors", JSON.stringify(tutors));
+}
+
+function render(){
+  const list = document.getElementById("tutorList");
+  list.innerHTML="";
+  tutors.forEach((tutor,index)=>{
+    const card=document.createElement("div");
+    card.className="card";
+    card.innerHTML=`
+      <img src="${tutor.image}">
+      <div>
+        <h3>${tutor.name}</h3>
+        <p>${tutor.subject}</p>
+      </div>
+    `;
+    card.onclick=()=> {
+      window.location.href="vov5.html?id="+index;
+    };
+    list.appendChild(card);
+  });
+}
+
+function openModal(){
+  document.getElementById("modal").style.display="block";
+}
+
+function addTutor(){
+  const name=document.getElementById("name").value;
+  const subject=document.getElementById("subject").value;
+  const image=document.getElementById("image");
+
+  if(name===""||subject===""||image.files.length===0){
+    alert("กรอกข้อมูลให้ครบ");
+    return;
+  }
+
+  const reader=new FileReader();
+  reader.onload=function(e){
+    tutors.push({name,subject,image:e.target.result});
+    saveData();
+    render();
+  };
+  reader.readAsDataURL(image.files[0]);
+
+  document.getElementById("modal").style.display="none";
+  document.getElementById("name").value="";
+  document.getElementById("subject").value="";
+  document.getElementById("image").value="";
+}
+
+render();
+</script>
+
+</body>
+</html>
