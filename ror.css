@@ -1,0 +1,91 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('Poppins/Poppins-Regular.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* เปลี่ยนมาใช้ 100vh เพื่อให้อยู่กึ่งกลางหน้าจอแนวตั้งพอดี */
+    background: #333;
+}
+
+.login {
+    border: 1px solid black;
+    width: 400px;
+    height: 500px;
+    background: url(images/bg-01.jpg); /* แก้คำว่า imagrs เป็น images */
+    background-position: center;
+    background-size: cover;
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .75);
+    overflow: hidden;
+}
+
+form {
+    /* ลบ display: block; ออกเพราะซ้ำซ้อน */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 40px;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: brightness(40%);
+    gap: 5px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    text-shadow: 0 0 2px rgba(0, 0, 0, .5);
+    margin-bottom: 60px;
+}
+
+label {
+    color: rgba(255, 255, 255, .8);
+    text-transform: uppercase;
+    font-size: 10px; /* แก้จาก font-style เป็น font-size */
+    letter-spacing: 2px;
+    padding-left: 10px;
+}
+
+input {
+    background: rgba(255, 255, 255, .3);
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px;
+    border: none;
+    margin-bottom: 20px;
+    color: white;
+    padding: 0 15px; /* เพิ่ม padding ให้ตัวอักษรไม่ชิดขอบซ้ายเกินไป */
+    outline: none; /* เอาขอบสีดำตอนกดคลิกพิมพ์ออกให้ดูสวยขึ้น */
+}
+
+button {
+    background: darkgreen;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 40px;
+    border: none;
+    margin: 10px 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+    color: white;
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: 0.3s; /* เพิ่ม transition ให้ตอน hover ดูนุ่มนวลขึ้น */
+}
+
+button:hover {
+    background: green;
+}
